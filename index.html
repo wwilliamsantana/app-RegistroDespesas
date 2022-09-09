@@ -35,7 +35,7 @@
     ></script>
   </head>
 
-  <body>
+  <body id="body">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
       <div class="container">
         <a class="navbar-brand" href="#">
@@ -138,10 +138,90 @@
           <button
             type="button"
             class="btn btn-primary"
+            id="buttonAdd"
             onclick="cadastrarDespesas()"
+            data-dismiss="modal"
           >
             <i class="fas fa-plus"></i>
           </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="erroGravacao"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-danger">
+            <h5 class="modal-title" id="exampleModalLabel">Erro na gravação</h5>
+            <button
+              type="button"
+              class="btn-close btn-outline-danger"
+              data-dismiss="modal"
+              aria-label="Close"
+              onclick="buttonClear()"
+            >
+              X
+            </button>
+          </div>
+          <div class="modal-body font-weight-bold">
+            Por favor! Preencha todos os dados!
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-dismiss="modal"
+              onclick="buttonClear()"
+            >
+              Voltar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="sucessoGravacao"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header text-success">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Sucesso na gravação
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-outline-danger"
+              data-dismiss="modal"
+              aria-label="Close"
+              onclick="buttonClear()"
+            >
+              X
+            </button>
+          </div>
+          <div class="modal-body font-weight-bold">
+            Despesas armazenadas com sucesso!
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-success"
+              data-dismiss="modal"
+              onclick="buttonClear()"
+            >
+              Voltar
+            </button>
+          </div>
         </div>
       </div>
     </div>

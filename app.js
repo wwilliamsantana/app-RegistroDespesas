@@ -62,10 +62,20 @@ function cadastrarDespesas() {
     valor.value
   )
 
+  let button = document.getElementById('buttonAdd')
+
   if (despesas.validarDados()) {
     bd.gravarLocal(despesas)
-    console.log('Dados válidos')
+
+    button.setAttribute('data-target', '#sucessoGravacao')
+    button.setAttribute('data-toggle', 'modal')
   } else {
-    console.log('Dados inválidos')
+    button.setAttribute('data-target', '#erroGravacao')
+    button.setAttribute('data-toggle', 'modal')
   }
+}
+
+function buttonClear() {
+  let button = document.getElementById('buttonAdd')
+  button.removeAttribute('data-toggle')
 }
