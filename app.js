@@ -10,7 +10,12 @@ class Despesas {
 
   validarDados() {
     for (let i in this) {
-      if (this[i] === null || this[i] === undefined || this[i] === '') {
+      if (
+        this[i] === null ||
+        this[i] === undefined ||
+        this[i] === '' ||
+        this[i] === ' '
+      ) {
         return false
       }
     }
@@ -62,16 +67,34 @@ function cadastrarDespesas() {
     valor.value
   )
 
-  let button = document.getElementById('buttonAdd')
-
   if (despesas.validarDados()) {
     bd.gravarLocal(despesas)
-
-    button.setAttribute('data-target', '#sucessoGravacao')
-    button.setAttribute('data-toggle', 'modal')
+    swapModal('success')
   } else {
-    button.setAttribute('data-target', '#erroGravacao')
+    swapModal('error')
+  }
+}
+
+function swapModal(version) {
+  let button = document.getElementById('buttonAdd')
+  let labelModal = document.getElementById('exampleModalLabel')
+  let buttonModal = document.getElementById('buttonModal')
+  let descricaoModal = document.getElementById('descricaoModal')
+
+  if (version === 'success') {
+    button.setAttribute('data-target', '#registroModal')
     button.setAttribute('data-toggle', 'modal')
+    labelModal.innerHTML = 'Sucesso na gravação'
+    labelModal.className = 'text-success'
+    buttonModal.className = 'btn btn-success'
+    descricaoModal.innerHTML = 'Despesas armazenadas com sucesso!'
+  } else if (version === 'error') {
+    button.setAttribute('data-target', '#registroModal')
+    button.setAttribute('data-toggle', 'modal')
+    labelModal.innerHTML = 'Erro na gravação'
+    labelModal.className = 'text-danger'
+    buttonModal.className = 'btn btn-danger'
+    descricaoModal.innerHTML = 'Por favor! Preencha todos os dados!'
   }
 }
 
