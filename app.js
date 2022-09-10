@@ -52,6 +52,12 @@ class Bd {
     let despesas = []
     for (let i = 1; i <= idAtual; i++) {
       let despesa = JSON.parse(localStorage.getItem(i))
+
+      if (despesa === null) {
+        continue
+      }
+
+      despesa.id = i
       despesas.push(despesa)
     }
     return despesas
@@ -80,6 +86,10 @@ class Bd {
     }
 
     return despesas
+  }
+
+  remover(id) {
+    localStorage.removeItem(id)
   }
 }
 
@@ -178,6 +188,19 @@ function carregarListaDespesas(despesas = []) {
     linha.insertCell(1).innerHTML = `${a.tipo}`
     linha.insertCell(2).innerHTML = `${a.descricao}`
     linha.insertCell(3).innerHTML = `${a.valor}`
+
+    let btn = document.createElement('button')
+    btn.className = 'btn btn-outline-danger'
+    btn.innerHTML = "<i class='fas fa-times'></i>"
+    btn.id = 'idRegistro' + a.id
+    btn.onclick = function () {
+      let id = this.id.replace('idRegistro', ' ')
+
+      bd.remover(parseInt(id))
+      window.location.reload()
+    }
+
+    linha.insertCell(4).append(btn)
   })
 }
 
