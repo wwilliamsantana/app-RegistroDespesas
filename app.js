@@ -79,7 +79,7 @@ class Bd {
       despesas = despesas.filter(d => d.tipo == despesa.tipo)
     }
 
-    console.log(despesas)
+    return despesas
   }
 }
 
@@ -144,9 +144,14 @@ function buttonClear() {
   button.removeAttribute('data-toggle')
 }
 
-function carregarListaDespesas() {
-  let despesas = bd.recuperarTodosRegistros()
+function carregarListaDespesas(despesas = []) {
+  if (despesas.length == 0) {
+    //Existe essa tratativa pois o body(consulta.html) chama está function tbm
+    despesas = bd.recuperarTodosRegistros()
+  }
+
   let table = document.getElementById('table')
+  table.innerHTML = ' '
 
   despesas.forEach(a => {
     let linha = table.insertRow()
@@ -186,5 +191,7 @@ function pesquisarDespesas() {
 
   let despesa = new Despesas(dia, mes, ano, tipo, descricao, valor)
 
-  bd.pesquisar(despesa)
+  let despesaFiltrada = bd.pesquisar(despesa)
+
+  carregarListaDespesas(despesaFiltrada)
 }
