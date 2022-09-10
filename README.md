@@ -2,7 +2,7 @@
 
 <div align="center">
   <br>
-  <img alt="RocketNews" width="100px" style="background-color:white;" src="https://github.com/wwilliamsantana/app-RegistroDespesas/blob/main/logo.png" />
+  <img alt="RocketNews" width="100px"  src="https://github.com/wwilliamsantana/app-RegistroDespesas/blob/main/logo.png" />
   <br>
 
   <br>
