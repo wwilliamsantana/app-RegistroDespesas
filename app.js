@@ -46,6 +46,16 @@ class Bd {
 
     localStorage.setItem('id', id) //Set do id + novo
   }
+
+  recuperarTodosRegistros() {
+    let idAtual = localStorage.getItem('id')
+    let despesas = []
+    for (let i = 1; i <= idAtual; i++) {
+      let despesa = JSON.parse(localStorage.getItem(i))
+      despesas.push(despesa)
+    }
+    return despesas
+  }
 }
 
 let bd = new Bd()
@@ -101,4 +111,36 @@ function swapModal(version) {
 function buttonClear() {
   let button = document.getElementById('buttonAdd')
   button.removeAttribute('data-toggle')
+}
+
+function carregarListaDespesas() {
+  let despesas = bd.recuperarTodosRegistros()
+  let table = document.getElementById('table')
+
+  despesas.forEach(a => {
+    let linha = table.insertRow()
+
+    switch (a.tipo) {
+      case '1':
+        a.tipo = 'Alimentação'
+        break
+      case '2':
+        a.tipo = 'Educação'
+        break
+      case '3':
+        a.tipo = 'Lazer'
+        break
+      case '4':
+        a.tipo = 'Saúde'
+        break
+      case '5':
+        a.tipo = 'Trasnporte'
+        break
+    }
+
+    linha.insertCell(0).innerHTML = `${a.dia}/${a.mes}/${a.ano} `
+    linha.insertCell(1).innerHTML = `${a.tipo}`
+    linha.insertCell(2).innerHTML = `${a.descricao}`
+    linha.insertCell(3).innerHTML = `${a.valor}`
+  })
 }
