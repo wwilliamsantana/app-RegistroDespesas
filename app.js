@@ -56,6 +56,31 @@ class Bd {
     }
     return despesas
   }
+
+  pesquisar(despesa) {
+    let despesas = this.recuperarTodosRegistros()
+
+    if (despesa.dia != '') {
+      despesas = despesas.filter(d => d.dia == despesa.dia)
+    }
+    if (despesa.mes != '') {
+      despesas = despesas.filter(d => d.mes == despesa.mes)
+    }
+    if (despesa.ano != '') {
+      despesas = despesas.filter(d => d.ano == despesa.ano)
+    }
+    if (despesa.descricao != '') {
+      despesas = despesas.filter(d => d.descricao == despesa.descricao)
+    }
+    if (despesa.valor != '') {
+      despesas = despesas.filter(d => d.valor == despesa.valor)
+    }
+    if (despesa.tipo != '') {
+      despesas = despesas.filter(d => d.tipo == despesa.tipo)
+    }
+
+    console.log(despesas)
+  }
 }
 
 let bd = new Bd()
@@ -80,6 +105,12 @@ function cadastrarDespesas() {
   if (despesas.validarDados()) {
     bd.gravarLocal(despesas)
     swapModal('success')
+    ano.value = ''
+    mes.value = ''
+    dia.value = ''
+    tipo.value = ''
+    descricao.value = ''
+    valor.value = ''
   } else {
     swapModal('error')
   }
@@ -143,4 +174,17 @@ function carregarListaDespesas() {
     linha.insertCell(2).innerHTML = `${a.descricao}`
     linha.insertCell(3).innerHTML = `${a.valor}`
   })
+}
+
+function pesquisarDespesas() {
+  let ano = document.getElementById('ano').value
+  let mes = document.getElementById('mes').value
+  let dia = document.getElementById('dia').value
+  let tipo = document.getElementById('tipo').value
+  let descricao = document.getElementById('descricao').value
+  let valor = document.getElementById('valor').value
+
+  let despesa = new Despesas(dia, mes, ano, tipo, descricao, valor)
+
+  bd.pesquisar(despesa)
 }
